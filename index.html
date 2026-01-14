@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Chat with GPT-OSS</title>
+</head>
+<body>
+  <h1>Chat with GPT-OSS</h1>
+  <textarea id="input" rows="4" cols="50"></textarea><br>
+  <button onclick="sendMessage()">Send</button>
+  <pre id="output"></pre>
+
+  <script>
+    async function sendMessage() {
+      const message = document.getElementById("input").value;
+      const res = await fetch("https://your-vercel-backend.vercel.app/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message }),
+      });
+      const data = await res.json();
+      document.getElementById("output").innerText = data.reply;
+    }
+  </script>
+</body>
+</html>
